@@ -1,1 +1,26 @@
+Core Connector Worker (CCW) – Sample XML
+File: connectors/ccw_example.xml
 
+<wd:Report_Data xmlns:wd="urn:com.workday/bsvc"> wd:Worker wd:Worker_ID12345</wd:Worker_ID> wd:Name wd:First_NameJohn</wd:First_Name> wd:Last_NameDoe</wd:Last_Name> </wd:Name> wd:Position wd:Position_ID9876</wd:Position_ID> wd:TitleSoftware Developer</wd:Title> wd:Supervisory_OrgIT Department</wd:Supervisory_Org> </wd:Position> wd:Contact wd:Emailjohn.doe@example.com</wd:Email> wd:Phone+1-555-123-4567</wd:Phone> </wd:Contact> </wd:Worker> </wd:Report_Data>
+
+✅ This simulates a Core Connector Worker (CCW) outbound XML payload.
+
+XSLT Transformation – XML → CSV
+File: transformations/xslt_samples/xml_to_csv.xslt
+
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:output method="text" encoding="UTF-8"/>
+
+<xsl:template match="/"> xsl:textWorker_ID,First_Name,Last_Name,Email,Phone </xsl:text> <xsl:apply-templates select="//wd:Worker"/> </xsl:template>
+
+<xsl:template match="wd:Worker" xmlns:wd="urn:com.workday/bsvc"> <xsl:value-of select="wd:Worker_ID"/>xsl:text,</xsl:text> <xsl:value-of select="wd:Name/wd:First_Name"/>xsl:text,</xsl:text> <xsl:value-of select="wd:Name/wd:Last_Name"/>xsl:text,</xsl:text> <xsl:value-of select="wd:Contact/wd:Email"/>xsl:text,</xsl:text> <xsl:value-of select="wd:Contact/wd:Phone"/>xsl:text </xsl:text> </xsl:template> </xsl:stylesheet>
+
+✅ This transforms the CCW XML into a CSV file for downstream systems.
+
+EIB Outbound Integration – Template XML
+File: connectors/eib_outbound_template.xml
+
+<wd:Report_Data xmlns:wd="urn:com.workday/bsvc"> wd:Workers wd:Worker wd:Worker_ID001</wd:Worker_ID> wd:Name wd:First_NameAlice</wd:First_Name> wd:Last_NameSmith</wd:Last_Name> </wd:Name> wd:Emailalice.smith@example.com</wd:Email> wd:Hire_Date2022-06-01</wd:Hire_Date> </wd:Worker> wd:Worker wd:Worker_ID002</wd:Worker_ID> wd:Name wd:First_NameBob</wd:First_Name> wd:Last_NameJohnson</wd:Last_Name> </wd:Name> wd:Emailbob.johnson@example.com</wd:Email> wd:Hire_Date2023-01-15</wd:Hire_Date> </wd:Worker> </wd:Workers> </wd:Report_Data>
+
+✅ This represents a Workday EIB Outbound pulling worker data for an external system.# Workday-Integration-
