@@ -1,0 +1,84 @@
+import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Twitter, Download, ArrowRight } from "lucide-react";
+import heroBackground from "@/assets/hero-background.jpg";
+
+export const HeroSection = () => {
+  return (
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={heroBackground} 
+          alt="Futuristic background" 
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-glow animate-pulse-glow"></div>
+        <div className="absolute inset-0 grid-bg"></div>
+      </div>
+
+      {/* Floating Particles */}
+      <div className="absolute inset-0 z-10">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className={`absolute w-2 h-2 bg-primary rounded-full animate-float opacity-60`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-20 container mx-auto px-4 text-center">
+        {/* Main Content */}
+        <div className="max-w-4xl mx-auto animate-fade-in">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent leading-tight">
+            Hi, I'm <span>Shaik Waseem Akram</span>,{" "}
+            <span className="block text-3xl md:text-5xl mt-2 leading-tight">
+              Workday Integration Developer & Specialist
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            I specialize in building smart integrations, automation workflows, 
+            and enterprise solutions that transform how organizations manage their data.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Button variant="hero" size="lg" className="group">
+              View My Projects
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button variant="glass" size="lg" className="group">
+              <Download className="mr-2 h-5 w-5" />
+              Download Resume
+            </Button>
+          </div>
+
+          {/* Social Links */}
+          <div className="flex justify-center space-x-6">
+            {[
+              { icon: Github, label: "GitHub", href: "#" },
+              { icon: Linkedin, label: "LinkedIn", href: "#" },
+              { icon: Twitter, label: "Twitter", href: "#" },
+            ].map(({ icon: Icon, label, href }) => (
+              <a
+                key={label}
+                href={href}
+                className="group p-3 glass rounded-lg hover:shadow-glow transition-all duration-300 hover:scale-110"
+                aria-label={label}
+              >
+                <Icon className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
